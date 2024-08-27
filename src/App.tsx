@@ -19,14 +19,27 @@ const T: FC<{ children: string }> = ({ children }) => {
 function App() {
   const navigate = useNavigate()
   const t = useTransationFromUrl()
+  const { i18n } = useTranslation()
 
   return (
     <div>
       <div>
-        <button onClick={() => navigate('/ko')}>한국어</button>
-        <button onClick={() => navigate('/en')}>영어</button>
-        <button onClick={() => navigate('/ja')}>일본어</button>
-        <button onClick={() => navigate('/zh')}>중국어</button>
+        <button onClick={async () => {
+            await i18n.changeLanguage('ko');
+            navigate('/ko');
+        }}>한국어</button>
+        <button onClick={async () => {
+            await i18n.changeLanguage('en');
+            navigate('/en');
+        }}>영어</button>
+        <button onClick={async () => {
+            await i18n.changeLanguage('ja');
+            navigate('/ja');
+        }}>일본어</button>
+        <button onClick={async () => {
+            await i18n.changeLanguage('zh');
+            navigate('/zh');
+        }}>중국어</button>
       </div>
       <>{t('환영합니다')}</>
       <T>환영합니다</T>
