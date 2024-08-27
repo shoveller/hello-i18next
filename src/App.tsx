@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { FC } from "react";
 
-const useTransationFromPath = () => {
+const useTransationFromUrl = () => {
     const { t } = useTranslation()
     const { language } = useParams<{ language: string }>()
 
@@ -11,14 +11,14 @@ const useTransationFromPath = () => {
 }
 
 const T: FC<{ children: string }> = ({ children }) => {
-    const t = useTransationFromPath()
+    const t = useTransationFromUrl()
 
     return <>{t(children)}</>
 }
 
 function App() {
   const navigate = useNavigate()
-  const t = useTransationFromPath()
+  const t = useTransationFromUrl()
 
   return (
     <div>
