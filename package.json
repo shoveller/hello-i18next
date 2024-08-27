@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "i18n:write": "i18next src/**/*.{ts,tsx} --config i18next-parser.config.js"
+    "i18n:write": "i18next -c translation/i18next-parser.config.js"
   },
   "dependencies": {
     "i18next": "^23.14.0",
