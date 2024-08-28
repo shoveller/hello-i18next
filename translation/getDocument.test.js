@@ -1,6 +1,6 @@
-import { loadSpreadsheet } from './googleSpreadSheetManager.js'
+import { getDocument } from './manager.js'
 
-loadSpreadsheet({
+getDocument({
   spreadsheetDocId: '1b18iKKNxe6arbc_H5M97hUKH6mMJo_gPn3ImdoakVf8',
   sheetId: '0',
   client_email: 'i18nservice@i18n-433805.iam.gserviceaccount.com',
