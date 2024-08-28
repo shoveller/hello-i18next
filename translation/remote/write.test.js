@@ -1,4 +1,5 @@
-import {getDocument, write} from './manager.js'
+import {write} from "./write.js";
+import {getDocument} from "./getDocument.js";
 
 async function main() {
     const doc = await getDocument({

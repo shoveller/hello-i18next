@@ -1,4 +1,4 @@
-import { getDocument } from './manager.js'
+import { getDocument } from './getDocument.js'
 
 getDocument({
   spreadsheetDocId: '1b18iKKNxe6arbc_H5M97hUKH6mMJo_gPn3ImdoakVf8',
