@@ -6,7 +6,7 @@ import fs from 'node:fs/promises'
  * @param {Record<string, string>} value
  * @returns {Promise<boolean>}
  */
-export const write = async ({value, path} = {}) => {
+export const writeFile = async ({value, path} = {}) => {
     try {
         const jsonString = JSON.stringify(value, null, 2);
         await fs.writeFile(path, jsonString);

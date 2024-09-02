@@ -1,6 +1,6 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
 import {createRequire} from 'module';
-import {write} from "../remote/write.js";
+import {writeGoogleSheet} from "./utils/writeGoogleSheet.js";
 const require = createRequire(import.meta.url);
 
 /**
@@ -21,27 +21,27 @@ const obj2Records = (object) => {
  * @param {GoogleSpreadsheet} doc
  * @returns {Promise<boolean>}
  */
-export const upload = async ({doc} = {}) => {
+export const uploadAllTranslations = async ({doc} = {}) => {
     return await Promise.all([
-        await write({
+        await writeGoogleSheet({
             title: 'ko',
             doc,
-            records: obj2Records(require('../../public/locales/ko/translation.json'))
+            records: obj2Records(require('../public/locales/ko/translation.json'))
         }),
-        await write({
+        await writeGoogleSheet({
             title: 'en',
             doc,
-            records: obj2Records(require('../../public/locales/en/translation.json'))
+            records: obj2Records(require('../public/locales/en/translation.json'))
         }),
-        await write({
+        await writeGoogleSheet({
             title: 'ja',
             doc,
-            records: obj2Records(require('../../public/locales/ja/translation.json'))
+            records: obj2Records(require('../public/locales/ja/translation.json'))
         }),
-        await write({
+        await writeGoogleSheet({
             title: 'zh',
             doc,
-            records: obj2Records(require('../../public/locales/zh/translation.json'))
+            records: obj2Records(require('../public/locales/zh/translation.json'))
         })
     ]).then(res => res.includes(false))
 }

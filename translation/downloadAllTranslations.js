@@ -1,15 +1,15 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
-import {write} from "./write.js";
-import {read} from "../remote/read.js";
-import {getDocument} from "../remote/getDocument.js";
+import {writeFile} from "./utils/writeFile.js";
+import {readGoogleSheet} from "./utils/readGoogleSheet.js";
+import {connectGoogleSpreadSheet} from "./utils/connectGoogleSpreadSheet.js";
 
 /**
  * 번역물을 다운로드 한다
  * @param {GoogleSpreadsheet} doc
  * @returns {Promise<boolean>}
  */
-export const download = async () => {
-    const doc = await getDocument({
+export const downloadAllTranslations = async () => {
+    const doc = await connectGoogleSpreadSheet({
         spreadsheetDocId: '1b18iKKNxe6arbc_H5M97hUKH6mMJo_gPn3ImdoakVf8',
         sheetId: '0',
         client_email: 'i18nservice@i18n-433805.iam.gserviceaccount.com',
@@ -17,40 +17,40 @@ export const download = async () => {
     })
 
     const [ko, en, ja, zh] = await Promise.all([
-        read({
+        readGoogleSheet({
             title: 'ko',
             doc
         }),
-        read({
+        readGoogleSheet({
             title: 'en',
             doc
         }),
-        read({
+        readGoogleSheet({
             title: 'ja',
             doc
         }),
-        read({
+        readGoogleSheet({
             title: 'zh',
             doc
         })
     ])
 
     return Promise.all([
-        write({
+        writeFile({
             value: ko,
-            path: '../../public/locales/ko/translation.json'
+            path: '../public/locales/ko/translation.json'
         }),
-        write({
+        writeFile({
             value: en,
-            path: '../../public/locales/en/translation.json'
+            path: '../public/locales/en/translation.json'
         }),
-        write({
+        writeFile({
             value: ja,
-            path: '../../public/locales/ja/translation.json'
+            path: '../public/locales/ja/translation.json'
         }),
-        write({
+        writeFile({
             value: zh,
-            path: '../../public/locales/zh/translation.json'
+            path: '../public/locales/zh/translation.json'
         })
     ]).then(res => res.includes(false))
 }

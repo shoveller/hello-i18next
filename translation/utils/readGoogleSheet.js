@@ -6,7 +6,7 @@ import {GoogleSpreadsheet} from 'google-spreadsheet';
  * @param {GoogleSpreadsheet} doc
  * @returns {Promise<Record<string, string>>}
  */
-export const read = async ({title, doc} = {}) => {
+export const readGoogleSheet = async ({title, doc} = {}) => {
     try {
         const sheet = doc.sheetsByTitle[title]
         const rows = await sheet.getRows();

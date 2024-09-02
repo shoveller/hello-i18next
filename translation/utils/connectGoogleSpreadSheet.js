@@ -9,7 +9,7 @@ import {JWT} from 'google-auth-library';
  * @param {string} private_key
  * @returns {Promise<GoogleSpreadsheet>}
  */
-export async function getDocument({spreadsheetDocId = '', sheetId = '', client_email = '', private_key = ''} = {}) {
+export async function connectGoogleSpreadSheet({spreadsheetDocId = '', sheetId = '', client_email = '', private_key = ''} = {}) {
     console.info(
         '\u001B[32m',
         '=====================================================================================================================\n',

@@ -7,7 +7,7 @@ import {GoogleSpreadsheet} from 'google-spreadsheet';
  * @param {{ key: string, value: string }} records
  * @returns {Promise<boolean>}
  */
-export const write = async ({title, doc, records} = {}) => {
+export const writeGoogleSheet = async ({title, doc, records} = {}) => {
     try {
         const sheet = doc.sheetsByTitle[title]
         const rows = await sheet.getRows();

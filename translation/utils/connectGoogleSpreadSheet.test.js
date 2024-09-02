@@ -1,6 +1,6 @@
-import { getDocument } from './getDocument.js'
+import { connectGoogleSpreadSheet } from './connectGoogleSpreadSheet.js'
 
-getDocument({
+connectGoogleSpreadSheet({
   spreadsheetDocId: '1b18iKKNxe6arbc_H5M97hUKH6mMJo_gPn3ImdoakVf8',
   sheetId: '0',
   client_email: 'i18nservice@i18n-433805.iam.gserviceaccount.com',
