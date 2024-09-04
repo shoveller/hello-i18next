@@ -6,7 +6,7 @@ import './i18n.ts'
 
 import {
     createBrowserRouter,
-    createRoutesFromElements,
+    createRoutesFromElements, Navigate,
     Outlet,
     Route,
     RouterProvider
@@ -15,8 +15,9 @@ import {
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<Outlet/>}>
         <Route index path="/:language" element={<App/>}/>
+        <Route path="*" element={<Navigate replace to="ko" />} />
     </Route>
-))
+), { basename: '/global' })
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
