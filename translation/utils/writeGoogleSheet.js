@@ -8,24 +8,28 @@ import {GoogleSpreadsheet} from 'google-spreadsheet';
  * @returns {Promise<boolean>}
  */
 export const writeGoogleSheet = async ({title, doc, records} = {}) => {
+    console.log(`${title} 작업 시작`);
     try {
-        const sheet = doc.sheetsByTitle[title]
-        const rows = await sheet.getRows();
+        const 구글시트 = doc.sheetsByTitle[title];
+        const 구글시트의_행들 = await 구글시트.getRows();
 
-        // 모든 행 삭제
-        for (let row of rows) {
-            await row.delete(); // 행 삭제
-        }
-        console.log(`remove all rows from ${title}`);
+        // 0. 업로드할 데이터를 추출한다.
+        const records4Upload = records.reduce((sum, record) => {
+            // 1. 시트에 업로드할 키가 있는지 확인한다.
+            const 일치하는_셀 = 구글시트의_행들.find((구글시트의_행) => 구글시트의_행.get('key') === record.key);
+            // 2. 일치하는 row 만 추출
+            if (!일치하는_셀) {
+                return [...sum, record];
+            }
+            return [];
+        }, []);
 
-        // 개발환경의 목록을 기록
-        for (let record of records) {
-            await sheet.addRow(record);
-        }
-        console.log(`write all rows from records to ${title}`);
+        await 구글시트.addRows(records4Upload);
 
-        return true
+        return true;
     } catch (e) {
-        return false
+        return false;
+    } finally {
+        console.log(`${title} 작업 완료`);
     }
 }
